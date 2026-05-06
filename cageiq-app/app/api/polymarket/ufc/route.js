@@ -1,77 +1,116 @@
 // Server-side API route - fetches live UFC odds from Polymarket
-// Cached for 60 seconds to avoid hammering their API
+// Strategy: hit /events endpoint, filter events whose title/slug mentions UFC,
+// then for each event extract head-to-head winner markets and probabilities.
 // URL: /api/polymarket/ufc
 
 const POLYMARKET_API = 'https://gamma-api.polymarket.com';
 
-export const revalidate = 60; // cache for 60s
+export const revalidate = 60;
 
-// Normalize names for fuzzy matching (handle accents, case, etc.)
-function normalize(s) {
-  return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
+function safeParse(x) {
+  if (!x) return null;
+  if (typeof x !== 'string') return x;
+  try { return JSON.parse(x); } catch { return null; }
 }
 
-// Try to match a market question to two fighter names
-function matchFight(question, fighterA, fighterB) {
-  const q = normalize(question);
-  const a = normalize(fighterA);
-  const b = normalize(fighterB);
-  // Check both first and last name for each
-  const aLast = a.split(' ').pop();
-  const bLast = b.split(' ').pop();
-  return q.includes(aLast) && q.includes(bLast);
+// Try to extract fighter names from a market question.
+// Common patterns:
+//   "Will Khamzat Chimaev defeat Sean Strickland at UFC 328?"
+//   "Khamzat Chimaev vs. Sean Strickland - Who wins?"
+function extractFighters(question) {
+  if (!question) return null;
+  const q = question.replace(/[?.!]/g, '');
+  // pattern A: "X vs Y"
+  let m = q.match(/^(.+?)\s+vs\.?\s+(.+?)(?:\s*[-–]|$)/i);
+  if (m) return { a: m[1].trim(), b: m[2].trim() };
+  // pattern B: "Will X defeat/beat Y"
+  m = q.match(/will\s+(.+?)\s+(?:defeat|beat|win\s+against)\s+(.+?)(?:\s+at\s+|\s+in\s+|$)/i);
+  if (m) return { a: m[1].trim(), b: m[2].trim() };
+  return null;
+}
+
+function isUFCEvent(ev) {
+  const blob = `${ev.title || ''} ${ev.slug || ''} ${ev.description || ''}`.toLowerCase();
+  return /\bufc\b|\bmma\b/.test(blob);
 }
 
 export async function GET() {
   try {
-    // Fetch all active UFC markets
-    const url = `${POLYMARKET_API}/markets?closed=false&active=true&limit=100&tag_slug=ufc`;
+    // Fetch high-volume active events. 200 is enough to find all UFC ones.
+    const url = `${POLYMARKET_API}/events?active=true&closed=false&limit=200&order=volume24hr&ascending=false`;
     const res = await fetch(url, {
       next: { revalidate: 60 },
       headers: { 'User-Agent': 'CageIQ/1.0' },
     });
 
     if (!res.ok) {
-      return Response.json({ error: `Polymarket API ${res.status}`, markets: [] }, { status: 200 });
+      return Response.json({ error: `Polymarket ${res.status}`, markets: [] });
     }
 
-    const raw = await res.json();
-    const markets = Array.isArray(raw) ? raw : [];
+    const events = await res.json();
+    if (!Array.isArray(events)) {
+      return Response.json({ error: 'unexpected response', markets: [] });
+    }
 
-    // Process each market into a clean format
-    const cleaned = markets
-      .filter((m) => m.question && m.outcomes && m.outcomePrices)
-      .map((m) => {
-        let outcomes, prices;
-        try {
-          outcomes = typeof m.outcomes === 'string' ? JSON.parse(m.outcomes) : m.outcomes;
-          prices = typeof m.outcomePrices === 'string' ? JSON.parse(m.outcomePrices) : m.outcomePrices;
-        } catch {
-          return null;
+    const ufcEvents = events.filter(isUFCEvent);
+    const fights = [];
+
+    for (const ev of ufcEvents) {
+      const evMarkets = ev.markets || [];
+      for (const m of evMarkets) {
+        if (m.closed || !m.active) continue;
+        const outcomes = safeParse(m.outcomes);
+        const prices = safeParse(m.outcomePrices);
+        if (!outcomes || outcomes.length !== 2 || !prices) continue;
+
+        let fighterA, fighterB, probA, probB;
+
+        const o0Lower = (outcomes[0] || '').toLowerCase();
+        const o1Lower = (outcomes[1] || '').toLowerCase();
+        const isYesNo = (o0Lower === 'yes' && o1Lower === 'no') || (o0Lower === 'no' && o1Lower === 'yes');
+
+        if (!isYesNo) {
+          fighterA = outcomes[0];
+          fighterB = outcomes[1];
+          probA = Math.round(parseFloat(prices[0]) * 100);
+          probB = Math.round(parseFloat(prices[1]) * 100);
+        } else {
+          // yes/no - parse the question
+          const extracted = extractFighters(m.question);
+          if (!extracted) continue;
+          fighterA = extracted.a;
+          fighterB = extracted.b;
+          const yesIdx = o0Lower === 'yes' ? 0 : 1;
+          const yesPrice = parseFloat(prices[yesIdx]);
+          probA = Math.round(yesPrice * 100);
+          probB = 100 - probA;
         }
-        if (!outcomes || outcomes.length !== 2) return null;
 
-        return {
+        if (!fighterA || !fighterB) continue;
+
+        fights.push({
+          event: ev.title,
+          eventSlug: ev.slug,
           question: m.question,
-          slug: m.slug,
-          fighterA: outcomes[0],
-          fighterB: outcomes[1],
-          probA: Math.round(parseFloat(prices[0]) * 100),
-          probB: Math.round(parseFloat(prices[1]) * 100),
+          fighterA,
+          fighterB,
+          probA,
+          probB,
           volume: m.volume ? `$${Math.round(parseFloat(m.volume) / 1000)}K` : null,
           liquidity: m.liquidity ? parseFloat(m.liquidity) : 0,
-          endDate: m.endDate,
-          url: `https://polymarket.com/market/${m.slug}`,
-        };
-      })
-      .filter(Boolean);
+          endDate: m.endDate || ev.endDate,
+          url: `https://polymarket.com/event/${ev.slug}`,
+        });
+      }
+    }
 
     return Response.json({
       updatedAt: new Date().toISOString(),
-      count: cleaned.length,
-      markets: cleaned,
+      ufcEventCount: ufcEvents.length,
+      count: fights.length,
+      markets: fights,
     });
   } catch (err) {
-    return Response.json({ error: err.message, markets: [] }, { status: 200 });
+    return Response.json({ error: err.message, markets: [] });
   }
 }
