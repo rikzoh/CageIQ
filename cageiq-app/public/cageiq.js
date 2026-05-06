@@ -1102,6 +1102,62 @@ renderChampions();
 // Cycle ticker every 8s
 setInterval(renderTicker,8000);
 
+// ============ LIVE POLYMARKET FETCH ============
+// Tries to fetch live odds from our /api/polymarket/ufc endpoint.
+// On success, merges live data into the existing POLYMARKET object
+// and re-renders any active screens. On failure, silently keeps
+// the static fallback data.
+async function loadLivePolymarket(){
+  try{
+    const res=await fetch('/api/polymarket/ufc');
+    if(!res.ok)return;
+    const data=await res.json();
+    if(!data.markets||!data.markets.length)return;
+    
+    let merged=0;
+    // For each known fight in the app, try to find a matching live market
+    // by matching fighter last names against the market's outcome tokens.
+    const allFights=[];
+    EVENTS.forEach(ev=>ev.fights.forEach(f=>allFights.push(f)));
+    HOT_MATCHUPS.forEach(m=>allFights.push({a:m.a,b:m.b}));
+    
+    allFights.forEach(f=>{
+      const aLast=f.a.split(' ').pop().toLowerCase();
+      const bLast=f.b.split(' ').pop().toLowerCase();
+      const live=data.markets.find(m=>{
+        const fa=(m.fighterA||'').toLowerCase();
+        const fb=(m.fighterB||'').toLowerCase();
+        return (fa.includes(aLast)&&fb.includes(bLast))||(fa.includes(bLast)&&fb.includes(aLast));
+      });
+      if(live){
+        // Determine which side maps to which
+        const liveAIsOurA=live.fighterA.toLowerCase().includes(aLast);
+        POLYMARKET[`${f.a}|${f.b}`]={
+          a:liveAIsOurA?live.probA:live.probB,
+          b:liveAIsOurA?live.probB:live.probA,
+          vol:live.volume||'live',
+          isLive:true,
+        };
+        merged++;
+      }
+    });
+    
+    if(merged>0){
+      // Re-render any visible content that uses polymarket data
+      renderEvents();
+      // Update the LIVE badge to show count
+      const badge=document.querySelector('.live-badge');
+      if(badge)badge.innerHTML=`<div class="live-dot"></div>LIVE · ${merged} markets`;
+      console.log(`[CageIQ] Loaded ${merged} live Polymarket markets`);
+    }
+  }catch(err){
+    console.warn('[CageIQ] Polymarket fetch failed, using static data:',err.message);
+  }
+}
+loadLivePolymarket();
+// Refresh live odds every 2 minutes
+setInterval(loadLivePolymarket,120000);
+
 // ============ SCROLL SNAP TRACKING ============
 function scrollToSection(idx){
   const container=document.getElementById('snap-container');
