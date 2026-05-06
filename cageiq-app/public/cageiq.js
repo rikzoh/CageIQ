@@ -4,7 +4,7 @@ const DIVISIONS={"HW":"Heavyweight","LHW":"Light Heavyweight","MW":"Middleweight
 
 // ============ FIGHTER DATABASE ============
 const FIGHTERS_FULL=[
-{n:"Tom Aspinall",d:"HW",c:"ENG",r:0,nk:"",rec:"15-3-0",age:32,reach:"78\"",height:"6'5\"",stance:"Orthodox",slpm:"5.34",sacc:"62%",sapm:"1.96",sdef:"62%",tdavg:"1.62",tdacc:"60%",tddef:"100%",subavg:"1.6",style:"Striker · BJJ Black Belt · Explosive Finisher",last5:[{r:"W",o:"Curtis Blaydes",m:"KO",rd:1,date:"Jul 2024"},{r:"W",o:"Sergei Pavlovich",m:"KO",rd:1,date:"Nov 2023"},{r:"W",o:"Marcin Tybura",m:"TKO",rd:1,date:"Jul 2023"},{r:"L",o:"Curtis Blaydes",m:"TKO",rd:1,date:"Jul 2022"},{r:"W",o:"Alexander Volkov",m:"Sub",rd:1,date:"Mar 2022"}],bio:"Inherited HW belt when Jon Jones retired June 2025. British powerhouse with KO power and BJJ. Most explosive HW finisher in the division."},
+{n:"Tom Aspinall",d:"HW",c:"ENG",r:0,nk:"",rec:"15-3-0",age:32,reach:"78\"",height:"6'5\"",stance:"Orthodox",slpm:"5.34",sacc:"62%",sapm:"1.96",sdef:"62%",tdavg:"1.62",tdacc:"60%",tddef:"100%",subavg:"1.6",style:"Striker · BJJ Black Belt · Explosive Finisher",last5:[{r:"W",o:"Ciryl Gane",m:"TKO",rd:2,date:"Oct 2025"},{r:"W",o:"Curtis Blaydes",m:"KO",rd:1,date:"Jul 2024"},{r:"W",o:"Sergei Pavlovich",m:"KO",rd:1,date:"Nov 2023"},{r:"W",o:"Marcin Tybura",m:"TKO",rd:1,date:"Jul 2023"},{r:"L",o:"Curtis Blaydes",m:"TKO",rd:1,date:"Jul 2022"}],bio:"Undisputed HW champion. Suffered eye injury during Oct 2025 title defense vs Gane at UFC 321 — currently sidelined and unable to compete at White House. Pereira vs Gane will determine his interim challenger."},
 {n:"Ciryl Gane",d:"HW",c:"FRA",r:1,nk:"Bon Gamin",rec:"13-2-0",age:34,reach:"81\"",height:"6'4\"",stance:"Orthodox",slpm:"5.10",sacc:"55%",sapm:"3.56",sdef:"55%",tdavg:"0.34",tdacc:"50%",tddef:"57%",subavg:"0",style:"Technical Striker · Footwork · Muay Thai"},
 {n:"Sergei Pavlovich",d:"HW",c:"RUS",r:2,rec:"19-3-0",age:34,style:"Heavy Hands · KO Power"},
 {n:"Curtis Blaydes",d:"HW",c:"USA",r:3,nk:"Razor",rec:"19-5-0",age:35,style:"Wrestler · Top Pressure"},
@@ -20,8 +20,8 @@ const FIGHTERS_FULL=[
 {n:"Francis Ngannou",d:"HW",c:"CMR",r:null,nk:"The Predator",bio:"Former UFC HW Champion. Left for PFL/Boxing."},
 
 {n:"Carlos Ulberg",d:"LHW",c:"NZL",r:0,rec:"13-1-0",age:34,reach:"79\"",height:"6'4\"",stance:"Orthodox",slpm:"5.20",sacc:"58%",sapm:"3.40",sdef:"58%",tdavg:"0.20",tdacc:"33%",tddef:"68%",subavg:"0",style:"City Kickboxing Striker · Pereira Disciple",bio:"Won LHW title April 11, 2026 at UFC 327 by KO1 over Procházka."},
-{n:"Alex Pereira",d:"LHW",c:"BRA",r:1,nk:"Poatan",rec:"12-3-0",age:38,reach:"79\"",height:"6'4\"",stance:"Orthodox",slpm:"5.00",sacc:"61%",sapm:"3.50",sdef:"58%",tdavg:"0",tdacc:"0%",tddef:"55%",subavg:"0",style:"Devastating Striker · Former 2-Div Champ",bio:"Former LHW champ. Booked vs Ankalaev rematch June 14."},
-{n:"Magomed Ankalaev",d:"LHW",c:"RUS",r:2,rec:"21-1-1",age:33,reach:"75\"",height:"6'3\"",stance:"Orthodox",slpm:"3.30",sacc:"54%",sapm:"2.10",sdef:"61%",tdavg:"1.80",tdacc:"50%",tddef:"77%",subavg:"0.4",style:"Pressure Wrestler · Heavy Hands",bio:"Former champ. Booked vs Pereira June 14."},
+{n:"Alex Pereira",d:"HW",c:"BRA",r:1,nk:"Poatan",rec:"12-3-0",age:38,reach:"79\"",height:"6'4\"",stance:"Orthodox",slpm:"5.00",sacc:"61%",sapm:"3.50",sdef:"58%",tdavg:"0",tdacc:"0%",tddef:"55%",subavg:"0",style:"Devastating Striker · Multi-Division Threat",bio:"Former 2-time LHW champion and former MW champion. Vacated LHW title in April 2026 to move up to heavyweight. Faces Ciryl Gane for interim HW title at Freedom 250 on June 14 — a win makes him a 3-division UFC champion."},
+{n:"Magomed Ankalaev",d:"LHW",c:"RUS",r:2,rec:"21-1-1",age:33,reach:"75\"",height:"6'3\"",stance:"Orthodox",slpm:"3.30",sacc:"54%",sapm:"2.10",sdef:"61%",tdavg:"1.80",tdacc:"50%",tddef:"77%",subavg:"0.4",style:"Pressure Wrestler · Heavy Hands",bio:"Former LHW champion. Lost belt to Pereira at UFC 320, then dropped the rematch. Without Pereira at LHW, he's the top contender pending matchmaking — likely faces new champ Carlos Ulberg next."},
 {n:"Jiri Prochazka",d:"LHW",c:"CZE",r:3,nk:"BJP",rec:"30-5-1",age:32,style:"Wild Striker · Samurai Mindset"},
 {n:"Khalil Rountree Jr",d:"LHW",c:"USA",r:4,nk:"The War Horse",rec:"14-6-0",age:35,style:"Striker · Body Shot Specialist"},
 {n:"Jamahal Hill",d:"LHW",c:"USA",r:5,nk:"Sweet Dreams"},
@@ -67,7 +67,7 @@ const FIGHTERS_FULL=[
 
 {n:"Ilia Topuria",d:"LW",c:"ESP",r:0,nk:"El Matador",rec:"17-0-0",age:29,reach:"69\"",height:"5'7\"",stance:"Orthodox",slpm:"6.80",sacc:"56%",sapm:"3.10",sdef:"63%",tdavg:"1.80",tdacc:"55%",tddef:"82%",subavg:"0.6",style:"KO Power · Boxing · BJJ · Undefeated",bio:"Undisputed LW champ. 17-0. Defending vs Gaethje (interim) at UFC White House June 14."},
 {n:"Justin Gaethje",d:"LW",c:"USA",r:1,nk:"The Highlight",rec:"26-5-0",age:37,reach:"70\"",height:"5'11\"",stance:"Orthodox",slpm:"6.40",sacc:"55%",sapm:"5.10",sdef:"55%",tdavg:"0.40",tdacc:"50%",tddef:"63%",subavg:"0",style:"Leg Kicks · Heavy Hands · BMF",bio:"Interim LW champ. Won interim Jan 24. Unifying with Topuria June 14."},
-{n:"Charles Oliveira",d:"LW",c:"BRA",r:2,nk:"Do Bronx",rec:"35-11-0",age:35,style:"BJJ Black Belt · Most Subs in UFC History",bio:"Former LW champ. Lost to Topuria."},
+{n:"Charles Oliveira",d:"LW",c:"BRA",r:2,nk:"Do Bronx",rec:"36-11-0",age:36,reach:"74\"",height:"5'10\"",stance:"Orthodox",slpm:"3.62",sacc:"54%",sapm:"3.18",sdef:"56%",tdavg:"2.20",tdacc:"40%",tddef:"50%",subavg:"3.4",style:"BJJ Black Belt · Most Submissions in UFC History · BMF Title Holder",last5:[{r:"W",o:"Max Holloway",m:"UD",rd:5,date:"Mar 2026"},{r:"W",o:"Mateusz Gamrot",m:"Sub",rd:2,date:"Oct 2025"},{r:"L",o:"Ilia Topuria",m:"KO",rd:1,date:"Jun 2025"},{r:"W",o:"Michael Chandler",m:"Sub",rd:2,date:"Nov 2024"},{r:"W",o:"Beneil Dariush",m:"TKO",rd:1,date:"Jun 2023"}],bio:"Former UFC Lightweight Champion and current BMF titleholder after dominating Max Holloway 50-45×3 at UFC 326 in March 2026. Holds UFC records for most submission wins (22), most finishes (21), and most performance bonuses (21). Ranked #3 LW and #11 P4P. Lost LW title fight to Topuria via R1 KO in June 2025 but rebounded with two dominant performances."},
 {n:"Arman Tsarukyan",d:"LW",c:"ARM",r:3,rec:"23-3-0",age:29,style:"Wrestler · Russian Top Team"},
 {n:"Max Holloway",d:"LW",c:"USA",r:4,nk:"Blessed",rec:"27-9-0",age:34,reach:"69\"",height:"5'11\"",stance:"Orthodox",slpm:"6.40",sacc:"49%",sapm:"4.50",sdef:"55%",tdavg:"0.10",tdacc:"33%",tddef:"83%",subavg:"0.4",style:"Volume King · Cardio · BMF"},
 {n:"Dustin Poirier",d:"LW",c:"USA",r:5,nk:"The Diamond",rec:"30-9-0",age:36,style:"Boxer-Brawler · Veteran"},
@@ -198,14 +198,19 @@ const EVENTS=[
 ]},
 {name:"UFC Fight Night",sub:"Allen vs Costa",date:"2026-05-16",venue:"UFC Apex",location:"Las Vegas",poster:"allen_costa",fights:[
 {a:"Arnold Allen",b:"Melquizael Costa",wc:"FW",isMain:true,isTitle:false},
+{a:"Macy Chiasson",b:"Mayra Bueno Silva",wc:"WBW",isMain:false,isTitle:false},
 ]},
 {name:"UFC Fight Night",sub:"Song vs Figueiredo",date:"2026-05-30",venue:"UFC Apex",location:"Las Vegas",poster:"song_fig",fights:[
 {a:"Song Yadong",b:"Deiveson Figueiredo",wc:"BW",isMain:true,isTitle:false},
 ]},
-{name:"UFC Freedom 250",sub:"At The White House",date:"2026-06-14",venue:"South Lawn",location:"Washington DC",poster:"freedom250",fights:[
-{a:"Islam Makhachev",b:"Leon Edwards",wc:"WW",isMain:true,isTitle:true,aIsChamp:true},
-{a:"Ilia Topuria",b:"Justin Gaethje",wc:"LW",isMain:false,isTitle:true,aIsChamp:true},
-{a:"Alex Pereira",b:"Magomed Ankalaev",wc:"LHW",isMain:false,isTitle:false},
+{name:"UFC Freedom 250",sub:"Topuria vs Gaethje · At The White House",date:"2026-06-14",venue:"South Lawn",location:"Washington DC",poster:"freedom250",fights:[
+{a:"Ilia Topuria",b:"Justin Gaethje",wc:"LW",isMain:true,isTitle:true,aIsChamp:true,note:"Title Unification"},
+{a:"Alex Pereira",b:"Ciryl Gane",wc:"HW",isMain:false,isTitle:true,note:"Interim HW Title"},
+{a:"Sean O'Malley",b:"Aiemann Zahabi",wc:"BW",isMain:false,isTitle:false},
+{a:"Mauricio Ruffy",b:"Michael Chandler",wc:"LW",isMain:false,isTitle:false},
+{a:"Bo Nickal",b:"Kyle Daukaus",wc:"MW",isMain:false,isTitle:false},
+{a:"Diego Lopes",b:"Steve Garcia",wc:"FW",isMain:false,isTitle:false},
+{a:"Derrick Lewis",b:"Josh Hokit",wc:"HW",isMain:false,isTitle:false},
 ]},
 ];
 
@@ -215,15 +220,22 @@ const RECENT_RESULTS=[
 {winner:"Aljamain Sterling",loser:"Youssef Zalal",method:"UD",rd:5,wc:"FW"},
 {winner:"Mayra Bueno Silva",loser:"Michelle Montague",method:"Sub R2",rd:2,wc:"WBW"},
 ]},
-{name:"UFC Fight Night: Burns vs Malott",date:"2026-04-18",venue:"UFC Apex, Las Vegas",fights:[
+{name:"UFC Fight Night: Burns vs Malott",date:"2026-04-18",venue:"Canada Life Centre, Winnipeg",fights:[
 {winner:"Mike Malott",loser:"Gilbert Burns",method:"TKO R3",rd:3,wc:"WW"},
 {winner:"Renato Moicano",loser:"Beneil Dariush",method:"Sub R2",rd:2,wc:"LW"},
 ]},
 {name:"UFC 327: Procházka vs Ulberg",date:"2026-04-11",venue:"Kaseya Center, Miami",fights:[
-{winner:"Carlos Ulberg",loser:"Jiri Prochazka",method:"KO R1",rd:1,wc:"LHW",titleFight:true},
+{winner:"Carlos Ulberg",loser:"Jiri Prochazka",method:"KO R1",rd:1,wc:"LHW",titleFight:true,note:"Vacant LHW Title"},
+{winner:"Josh Hokit",loser:"Curtis Blaydes",method:"UD",rd:3,wc:"HW"},
+]},
+{name:"UFC 326: Holloway vs Oliveira 2",date:"2026-03-07",venue:"T-Mobile Arena, Las Vegas",fights:[
+{winner:"Charles Oliveira",loser:"Max Holloway",method:"UD",rd:5,wc:"LW",titleFight:true,note:"BMF Title"},
+]},
+{name:"UFC 325: Volkanovski vs Lopes 2",date:"2026-01-31",venue:"Qudos Bank Arena, Sydney",fights:[
+{winner:"Alexander Volkanovski",loser:"Diego Lopes",method:"UD",rd:5,wc:"FW",titleFight:true},
 ]},
 {name:"UFC 324: Gaethje vs Pimblett",date:"2026-01-24",venue:"T-Mobile Arena, Las Vegas",fights:[
-{winner:"Justin Gaethje",loser:"Paddy Pimblett",method:"TKO R5",rd:5,wc:"LW",titleFight:true,note:"Interim Title"},
+{winner:"Justin Gaethje",loser:"Paddy Pimblett",method:"TKO R5",rd:5,wc:"LW",titleFight:true,note:"Interim LW Title"},
 ]},
 {name:"UFC 323",date:"2025-12-06",venue:"MGM Grand, Las Vegas",fights:[
 {winner:"Petr Yan",loser:"Merab Dvalishvili",method:"UD",rd:5,wc:"BW",titleFight:true},
@@ -236,36 +248,39 @@ const RECENT_RESULTS=[
 
 // ============ NEWS (Real headlines May 2026) ============
 const NEWS=[
-{tag:"breaking",time:"2h ago",title:"UFC 328: Bad Blood Boils Over at Final Faceoff",summary:"Khamzat Chimaev and Sean Strickland needed extra security separating them at Friday's faceoff in Newark. The two former training partners have traded constant insults all week."},
-{tag:"fight",time:"5h ago",title:"Polymarket: Chimaev Crowd Heavily Backs Champ at 75%",summary:"Polymarket bettors have placed over $367K on the UFC 328 main event, with Chimaev sitting at a heavy 75% implied probability vs Strickland's 16%. The gap reflects Chimaev's wrestling dominance."},
-{tag:"injury",time:"8h ago",title:"Kayla Harrison Cleared to Train, Targets Late 2026 Return",summary:"WBW champ Kayla Harrison says her return to the octagon is imminent after recovering from neck surgery. Title defense vs Amanda Nunes likely rebooked for UFC 330 in August or MSG in November."},
-{tag:"fight",time:"1d ago",title:"Topuria-Gaethje Title Unification Set for White House Card",summary:"The UFC's June 14 'Freedom 250' card at the White House South Lawn is officially headlined by Makhachev vs Edwards, Topuria vs Gaethje for undisputed LW gold, and Pereira vs Ankalaev rematch."},
-{tag:"results",time:"1d ago",title:"Aljamain Sterling Returns with Win over Zalal at UFC Vegas 116",summary:"Sterling admitted he considered retirement before the fight but secured a unanimous decision win in the main event. He's now positioning for a top-5 FW contender slot."},
-{tag:"general",time:"2d ago",title:"UFC EA Sports Game Release Date Leaked",summary:"EA Sports UFC 6 release date allegedly leaked. Expected to drop in fall 2026 with full roster and updated mechanics including Polymarket integration for prediction modes."},
-{tag:"fight",time:"3d ago",title:"Joshua Van Defends Against Tatsuro Taira at UFC 328",summary:"Despite being champion, Van opens as the +160 underdog against Taira (-192) — bookmakers favor the Japanese grappler's submission game."},
-{tag:"general",time:"4d ago",title:"Tom Aspinall: 'I Want Jon Jones Back to Settle It Forever'",summary:"HW champ Aspinall reiterates his stance that he'd come out of retirement to settle the GOAT debate with Jones, who retired in June 2025."},
-{tag:"injury",time:"5d ago",title:"Alex Pereira Confirms 100% Healed Ahead of Ankalaev Rematch",summary:"Poatan posted training footage showing he's fully recovered ahead of the June 14 grudge match against Ankalaev at the White House event."},
-{tag:"general",time:"1w ago",title:"Polymarket Becomes Official UFC Predictions Partner",summary:"The crypto-based prediction market platform announces deeper UFC integration. Real-time odds and over $1.9M trading volume across 20+ active markets."},
-{tag:"results",time:"1w ago",title:"Carlos Ulberg KO's Procházka in Round 1 to Take LHW Title",summary:"At UFC 327 in Miami, Ulberg shocked the world with a 3:45 R1 KO over Jiri Prochazka, becoming the new LHW champion and continuing City Kickboxing's dominance."},
-{tag:"fight",time:"2w ago",title:"Khamzat Chimaev Breaks UFC Total Strikes Record vs DDP",summary:"Chimaev landed 529 total strikes in his title-winning performance over Dricus du Plessis, breaking the all-time UFC record and answering all cardio questions."},
+{tag:"breaking",time:"2h ago",title:"UFC 328: Bad Blood Boils Over at Final Faceoff",summary:"Khamzat Chimaev and Sean Strickland needed extra security separating them at Friday's faceoff in Newark. The middleweight champion enters as a heavy -590 favorite over the former titleholder."},
+{tag:"fight",time:"5h ago",title:"Polymarket: Chimaev Crowd Heavily Backs Champ at 82%",summary:"Polymarket bettors have placed over $669K on the UFC 328 main event, with Chimaev sitting at 82% implied probability vs Strickland's 19%. The gap reflects Chimaev's wrestling dominance and undefeated 15-0 record."},
+{tag:"fight",time:"6h ago",title:"Pereira Moves Up to Heavyweight, Faces Gane at White House",summary:"Alex Pereira vacated the LHW title in April to chase a 3rd division belt. He'll face Ciryl Gane for the interim HW title at Freedom 250 — Tom Aspinall remains undisputed champ but is sidelined with an eye injury suffered at UFC 321."},
+{tag:"results",time:"2d ago",title:"Charles Oliveira Dominates Holloway, Wins BMF Title at UFC 326",summary:"Oliveira put on a grappling clinic, scoring a 50-45 unanimous decision sweep across all judges to claim the symbolic BMF belt. He becomes the 4th BMF titleholder and first to hold both LW and BMF titles in his career."},
+{tag:"injury",time:"3d ago",title:"Tom Aspinall Sidelined: Eye Injury Forces Withdrawal from White House",summary:"HW champ Aspinall confirmed he can't compete at Freedom 250 following an eye injury suffered during his October title defense vs Gane at UFC 321. He'll relinquish the spot for Pereira's interim run."},
+{tag:"fight",time:"1d ago",title:"Topuria-Gaethje Title Unification Locked In for June 14",summary:"The UFC's June 14 'Freedom 250' card at the White House South Lawn is officially headlined by Topuria vs Gaethje for undisputed LW gold. Topuria enters 17-0 looking to defend, Gaethje carries the interim belt won at UFC 324."},
+{tag:"general",time:"4d ago",title:"EA Sports UFC 6 Releases June 19, Just Days After White House",summary:"EA Sports UFC 6 release date locked for June 19, 2026 — five days after Freedom 250. Updated mechanics, full 2026 roster, and Polymarket integration for prediction modes confirmed."},
+{tag:"results",time:"1w ago",title:"Carlos Ulberg KO's Procházka in Round 1 to Win Vacant LHW Title",summary:"At UFC 327 in Miami, Ulberg shocked the world with a R1 KO over Jiri Prochazka to claim the vacant LHW title (vacated by Pereira). City Kickboxing's continued dominance shows no signs of slowing."},
+{tag:"general",time:"4d ago",title:"UFC White House Card Set for 6-7 Fights, Cageside Limited",summary:"TKO Group's Ari Emanuel confirmed a 6-fight card on the South Lawn with under 5,000 attendees due to security. The Ellipse will host up to 85,000 spectators with large screens for public viewing."},
+{tag:"fight",time:"3d ago",title:"Joshua Van Opens as Underdog Against Taira at UFC 328",summary:"Despite being champion, Van enters at +160 against Taira (-192) — bookmakers favor the Japanese grappler's submission game over the volume striking of the burmese-american champion."},
+{tag:"results",time:"1w ago",title:"Carlos Prates KOs Jack Della Maddalena at UFC Perth",summary:"In a brutal upset, Prates handed the former WW champ JDM another loss in front of a hostile Australian crowd. Della Maddalena now faces a long road back after the Makhachev defeat in November."},
+{tag:"general",time:"2w ago",title:"Polymarket UFC Volume Tops $1.9M for Upcoming Slate",summary:"The crypto-based prediction market continues deepening UFC integration. Real-time odds and 20+ active markets, with UFC 328 alone driving over $700K in trading volume."},
+{tag:"general",time:"2w ago",title:"Khamzat Chimaev Breaks UFC Strikes Record vs DDP",summary:"Chimaev landed 529 total strikes in his title-winning performance over Dricus du Plessis at UFC's 2025 finale, breaking the all-time UFC record and answering every cardio question."},
 ];
 
 const TICKER_MSGS=[
 "BREAKING — UFC 328 main event: Chimaev opens as -590 favorite at FanDuel",
 "NEWS — Topuria 17-0, looking to add Gaethje to the highlight reel June 14",
 "BETS — Polymarket UFC volume tops $1.9M for upcoming slate",
-"NEWS — Aspinall calls out Pereira for cross-division superfight",
+"NEWS — Pereira moves to heavyweight, faces Gane for interim HW title",
+"INJURY — Aspinall sidelined for White House with eye injury from UFC 321",
+"RESULTS — Oliveira beats Holloway 50-45 across all 3 judges, wins BMF title",
 ];
 
-const P4P_TOP10=["Islam Makhachev","Ilia Topuria","Alex Pereira","Tom Aspinall","Khamzat Chimaev","Merab Dvalishvili","Alexander Volkanovski","Petr Yan","Magomed Ankalaev","Max Holloway"];
+const P4P_TOP10=["Islam Makhachev","Ilia Topuria","Khamzat Chimaev","Alex Pereira","Tom Aspinall","Merab Dvalishvili","Alexander Volkanovski","Charles Oliveira","Petr Yan","Max Holloway"];
 
 const HOT_MATCHUPS=[
-{a:"Khamzat Chimaev",b:"Sean Strickland",tag:"MAY 9 · 75%"},
-{a:"Joshua Van",b:"Tatsuro Taira",tag:"MAY 9 · 53%"},
-{a:"Islam Makhachev",b:"Leon Edwards",tag:"JUN 14 · 78%"},
-{a:"Ilia Topuria",b:"Justin Gaethje",tag:"JUN 14 · 68%"},
-{a:"Alex Pereira",b:"Magomed Ankalaev",tag:"JUN 14 · 52%"},
-{a:"Tom Aspinall",b:"Ciryl Gane",tag:"DREAM · 54%"},
+{a:"Khamzat Chimaev",b:"Sean Strickland",tag:"MAY 9 · 82%"},
+{a:"Joshua Van",b:"Tatsuro Taira",tag:"MAY 9 · 42%"},
+{a:"Ilia Topuria",b:"Justin Gaethje",tag:"JUN 14 · UNIF"},
+{a:"Alex Pereira",b:"Ciryl Gane",tag:"JUN 14 · INT HW"},
+{a:"Sean O'Malley",b:"Aiemann Zahabi",tag:"JUN 14"},
+{a:"Michael Chandler",b:"Mauricio Ruffy",tag:"JUN 14"},
 ];
 
 let isDark=true,currentDiv="LW";
@@ -455,8 +470,13 @@ function renderHero(){
     </div>`;
 }
 
+function parseLocalDate(iso){
+  const [y,m,d]=iso.split('-').map(Number);
+  return new Date(y,m-1,d);
+}
+
 function getCountdown(d){
-  const t=new Date(d).getTime()-Date.now();
+  const t=parseLocalDate(d).getTime()-Date.now();
   if(t<0)return null;
   return{d:Math.floor(t/86400000),h:Math.floor((t/3600000)%24),m:Math.floor((t/60000)%60)};
 }
@@ -474,8 +494,10 @@ function renderDashStats(){
 }
 
 function formatDate(iso){
-  const d=new Date(iso);
-  return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+  // Parse as local time to avoid timezone shifting (e.g. "2026-06-14" → June 14, not June 13)
+  const [y,m,d]=iso.split('-').map(Number);
+  const dt=new Date(y,m-1,d);
+  return dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
 }
 
 function renderChampions(){
